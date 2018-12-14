@@ -36,7 +36,7 @@ This demo deploys to server using deployer and circle-ci. Follow below steps to 
 
     ![SSH key setup button](./screenshots/ssh_key_add.png)
 
-- Add public key to `knownhosts` on server to run deployer
+- Add public key to `~/.ssh/authorized_keys` on server to run deployer
 
 **ENVIRONMENT Variables**
 
