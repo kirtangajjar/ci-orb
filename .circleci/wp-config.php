@@ -80,9 +80,11 @@ define( 'DISALLOW_FILE_MODS', true );
 define( 'WP_CACHE_KEY_SALT', $_ENV['WP_CACHE_KEY_SALT'] );
 define( 'WP_DEBUG_DISPLAY', false );
 
-// Need this for ee4, due to it being behind a reverse proxy.
-if ( isset( $_SERVER["HTTP_X_FORWARDED_PROTO"] ) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https" ) {
-    $_SERVER["HTTPS"] = "on";
+// If behind reverse proxy
+if ( isset( $_ENV['BEHIND_REVERSE_PROXY'] ) && true === $_ENV['BEHIND_REVERSE_PROXY'] ) {
+	if ( isset( $_SERVER["HTTP_X_FORWARDED_PROTO"] ) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https" ) {
+		$_SERVER["HTTPS"] = "on";
+	}
 }
 
 if ( isset ($_ENV[ 'WP_ENV' ]) && $_ENV[ 'WP_ENV' ] != 'production' ) {
