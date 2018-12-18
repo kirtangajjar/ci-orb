@@ -24,11 +24,19 @@ $_ENV['SUBDOMAIN_INSTALL'] = (bool) $_ENV['SUBDOMAIN_INSTALL'];
 
 define( 'WP_ENV', $_ENV[ 'WP_ENV' ] ?: 'production' );
 
-
-if ( ! $_ENV[ 'WP_HOME' ] ) {
-	$_ENV['SERVER_NAME'] = $_ENV[ 'WP_HOME' ];
+/*
+ * On multisites the site url for sub-site was not updating.
+ *
+ * @see https://github.com/rtCamp/sys-VIP-Go-Template/issues/1
+ */
+if ( $_ENV['SUBDOMAIN_INSTALL'] ) {
+    $_ENV['SERVER_NAME'] = $_SERVER['HTTP_HOST'];
+    $_ENV[ 'WP_HOME' ] = '';
+    $_ENV[ 'WP_SITEURL' ] = '';
+} else if ( ! $_ENV[ 'WP_HOME' ] ) {
+    $_ENV['SERVER_NAME'] = $_ENV[ 'WP_HOME' ];
 } else {
-	$_ENV['SERVER_NAME'] = 'localhost';
+    $_ENV['SERVER_NAME'] = 'localhost';
 }
 
 $protocol = isset( $_ENV['HTTPS'] ) ? 'https://' : 'http://';
@@ -71,6 +79,14 @@ define( 'DISALLOW_FILE_EDIT', true );
 define( 'DISALLOW_FILE_MODS', true );
 define( 'WP_CACHE_KEY_SALT', $_ENV['WP_CACHE_KEY_SALT'] );
 define( 'WP_DEBUG_DISPLAY', false );
+
+// If behind reverse proxy
+if ( isset( $_ENV['BEHIND_REVERSE_PROXY'] ) && true === $_ENV['BEHIND_REVERSE_PROXY'] ) {
+	if ( isset( $_SERVER["HTTP_X_FORWARDED_PROTO"] ) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https" ) {
+		$_SERVER["HTTPS"] = "on";
+	}
+}
+
 if ( isset ($_ENV[ 'WP_ENV' ]) && $_ENV[ 'WP_ENV' ] != 'production' ) {
 	// Activated for staging only.
 	define( 'WP_DEBUG', true );
