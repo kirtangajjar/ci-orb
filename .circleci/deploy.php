@@ -44,7 +44,7 @@ set('rsync', [
 	'filter-file'  => false,
 	'filter-perdir'=> false,
 	'flags'        => 'rz', // Recursive, with compress
-	'options'      => ['delete', 'delete-excluded', 'links'],
+	'options'      => [ 'delete', 'delete-excluded', 'links', 'no-perms', 'no-owner', 'no-group' ],
 	'timeout'      => 300,
 ]);
 set('rsync_src', getenv('build_root'));
