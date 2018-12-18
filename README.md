@@ -5,7 +5,7 @@ This demo repo will include basic circle ci for below.
 - phpcs
 - deploy
 
-It also supports composer, npm, gulp as it's part of [docker image](https://hub.docker.com/r/vaishu27/ci-deployer-wp/tags) we have used here.
+It also supports composer, npm, gulp as it's part of [docker image](https://hub.docker.com/r/rtcamp/ci-deployer/tags) we have used here.
 
 **PHPCS**
 
