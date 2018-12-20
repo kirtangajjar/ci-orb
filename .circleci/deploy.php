@@ -101,6 +101,16 @@ task('opcache:reset', function () {
 	writeln('<info>' . $output . '</info>');
 });
 
+/*
+ * Change permissions to 'www-data' for 'current/',
+ * so that 'wp-cli' can read/write files.
+ */
+desc('Correct Permissions');
+task('permissions:set', function () {
+	$output = run('chown -RH www-data:www-data {{deploy_path}}/current && chown www-data:www-data {{deploy_path}}/current');
+	writeln('<info>' . $output . '</info>');
+});
+
 /*   deployment task   */
 desc('Deploy the project');
 task('deploy', [
@@ -111,6 +121,7 @@ task('deploy', [
 	'rsync',
 	'cachetool:download',
 	'deploy:symlink',
+	'permissions:set',
 	'opcache:reset',
 	'deploy:unlock',
 	'cleanup'
