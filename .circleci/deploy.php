@@ -77,9 +77,8 @@ if ( json_last_error() === JSON_ERROR_NONE && ! empty( $server_details ) && is_a
 		->hostname($detail['server'])
 		->user($detail['user'])          //the user with which files are to be copied, as EE uses www-data it wont change
 		->identityFile('~/.ssh/id_rsa')    // identification files, wont change
-		->set('deploy_path', $detail['path'])
-		->addSshOption('RequestTTY', 'yes' );        // deployment path
-		
+		->set('deploy_path', $detail['path']);
+
 		if( ! empty( $detail['site'] ) ) {
 			$host->set('site', $detail['site']);
 		}
@@ -130,5 +129,5 @@ task('deploy', [
 task('custom_symlink', function() {
 	run("mv -T {{deploy_path}}/release {{deploy_path}}/current1");
 });
-after('deploy', 'custom_symlink');
+after('deploy:symlink', 'custom_symlink');
 after('deploy', 'success');
