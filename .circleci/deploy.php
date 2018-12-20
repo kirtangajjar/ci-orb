@@ -73,15 +73,14 @@ if ( json_last_error() === JSON_ERROR_NONE && ! empty( $server_details ) && is_a
 	foreach ( $server_details as $branch => $detail ) {
 
 		/* list the servers and deployment path with other details*/
-		host( $branch )   //server name for the deployment process to choose from  and dns name or ip address to the server, must be pointable from the internet
+		$host = host( $branch )   //server name for the deployment process to choose from  and dns name or ip address to the server, must be pointable from the internet
 		->hostname($detail['server'])
 		->user($detail['user'])          //the user with which files are to be copied, as EE uses www-data it wont change
 		->identityFile('~/.ssh/id_rsa')    // identification files, wont change
 		->set('deploy_path', $detail['path']);        // deployment path
 		
 		if( ! empty( $detail['site'] ) ) {
-			host( $branch )
-			->set('site',$detail['site']);
+			$host->set('site',$detail['site']);
 			writeln('Got site');
 		}
 	}
