@@ -85,7 +85,7 @@ if ( json_last_error() === JSON_ERROR_NONE && ! empty( $server_details ) && is_a
 			->user($detail['user'])          //the user with which files are to be copied, as EE uses www-data it wont change
 			->identityFile('~/.ssh/id_rsa')    // identification files, wont change
 			->set('deploy_path', $detail['path'])        // deployment path
-			->set('site',$detail['site']);
+			->set('site', 'kirtan-ci-test.dev.rt.gw');
 			writeln('Got site');
 		}
 	}
