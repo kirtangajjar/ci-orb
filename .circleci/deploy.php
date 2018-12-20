@@ -73,20 +73,14 @@ if ( json_last_error() === JSON_ERROR_NONE && ! empty( $server_details ) && is_a
 	foreach ( $server_details as $branch => $detail ) {
 
 		/* list the servers and deployment path with other details*/
-		host( $branch )   //server name for the deployment process to choose from  and dns name or ip address to the server, must be pointable from the internet
+		$host = host( $branch )   //server name for the deployment process to choose from  and dns name or ip address to the server, must be pointable from the internet
 		->hostname($detail['server'])
 		->user($detail['user'])          //the user with which files are to be copied, as EE uses www-data it wont change
 		->identityFile('~/.ssh/id_rsa')    // identification files, wont change
 		->set('deploy_path', $detail['path']);        // deployment path
 		
 		if( ! empty( $detail['site'] ) ) {
-			host( $branch )   //server name for the deployment process to choose from  and dns name or ip address to the server, must be pointable from the internet
-			->hostname($detail['server'])
-			->user($detail['user'])          //the user with which files are to be copied, as EE uses www-data it wont change
-			->identityFile('~/.ssh/id_rsa')    // identification files, wont change
-			->set('deploy_path', $detail['path'])        // deployment path
-			->set('site', 'kirtan-ci-test.dev.rt.gw');
-			//writeln('Got site');
+			$host->set('site', $detail['site']);
 		}
 	}
 
@@ -107,11 +101,11 @@ task('cachetool:download', function () {
 desc('Reset opcache');
 task('opcache:reset', function () {
 	
-	$ee4 = shell_exec('ee --version | grep "EE 4"') !== NULL;
+	$ee4 = run('ee --version | grep "EE 4"') !== NULL;
 
 	if( $ee4 ) {
-		$site = Task\Context::get()->getHost()->get('site');
-		$output = run('ee shell $site --command="php cachetool.phar opcache:reset --fcgi=127.0.0.1:9000"');
+		// $site = Task\Context::get()->getHost()->get('site');
+		$output = run('ee shell {{site}} --command="php cachetool.phar opcache:reset --fcgi=127.0.0.1:9000"');
 	} else {
 		$output = run('php {{release_path}}/cachetool.phar opcache:reset --fcgi=127.0.0.1:9070');
 	}
