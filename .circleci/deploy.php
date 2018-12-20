@@ -78,7 +78,12 @@ if ( json_last_error() === JSON_ERROR_NONE && ! empty( $server_details ) && is_a
 		->user($detail['user'])          //the user with which files are to be copied, as EE uses www-data it wont change
 		->identityFile('~/.ssh/id_rsa')    // identification files, wont change
 		->set('deploy_path', $detail['path']);        // deployment path
-
+		
+		if( ! empty( $detail['site'] ) ) {
+			host( $branch )
+			->set('site',$detail['site']);
+			writeln('Got site');
+		}
 	}
 
 } else {
@@ -97,7 +102,14 @@ task('cachetool:download', function () {
 /*  custom task defination    */
 desc('Reset opcache');
 task('opcache:reset', function () {
-	$output = run('php {{release_path}}/cachetool.phar opcache:reset --fcgi=127.0.0.1:9070');
+	
+	$ee4 = shell_exec('ee --version | grep "EE 4"') !== NULL;
+
+	if( $ee4 ) {
+		$output = run('ee shell {{site}} --command="php cachetool.phar opcache:reset --fcgi=127.0.0.1:9000"');
+	} else {
+		$output = run('php {{release_path}}/cachetool.phar opcache:reset --fcgi=127.0.0.1:9070');
+	}
 	writeln('<info>' . $output . '</info>');
 });
 
