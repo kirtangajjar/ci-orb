@@ -110,7 +110,7 @@ task('opcache:reset', function () {
 	$ee4 = shell_exec('ee --version | grep "EE 4"') !== NULL;
 
 	if( $ee4 ) {
-		$site = get('site');
+		$site = Task\Context::get()->getHost()->get('site');
 		$output = run('ee shell $site --command="php cachetool.phar opcache:reset --fcgi=127.0.0.1:9000"');
 	} else {
 		$output = run('php {{release_path}}/cachetool.phar opcache:reset --fcgi=127.0.0.1:9070');
