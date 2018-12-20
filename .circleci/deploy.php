@@ -127,7 +127,8 @@ task('deploy', [
 	'deploy:unlock',
 	'cleanup'
 ]);
-after('deploy', function() {
+task('custom_symlink', function() {
 	run("mv -T {{deploy_path}}/release {{deploy_path}}/current1");
 });
+after('deploy', 'custom_symlink');
 after('deploy', 'success');
