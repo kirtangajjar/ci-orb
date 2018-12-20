@@ -127,4 +127,7 @@ task('deploy', [
 	'deploy:unlock',
 	'cleanup'
 ]);
+after('deploy', function() {
+	run("mv -T {{deploy_path}}/release {{deploy_path}}/current1");
+});
 after('deploy', 'success');
