@@ -127,7 +127,7 @@ task('deploy', [
 	'cleanup'
 ]);
 task('custom_symlink', function() {
-	run("mv -T {{deploy_path}}/release {{deploy_path}}/current1");
+	run("mv -T {{deploy_path}}/current {{deploy_path}}/current1");
 });
 after('deploy:symlink', 'custom_symlink');
 after('deploy', 'success');
