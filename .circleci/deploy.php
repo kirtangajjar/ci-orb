@@ -86,7 +86,7 @@ if ( json_last_error() === JSON_ERROR_NONE && ! empty( $server_details ) && is_a
 			->identityFile('~/.ssh/id_rsa')    // identification files, wont change
 			->set('deploy_path', $detail['path'])        // deployment path
 			->set('site', 'kirtan-ci-test.dev.rt.gw');
-			writeln('Got site');
+			//writeln('Got site');
 		}
 	}
 
