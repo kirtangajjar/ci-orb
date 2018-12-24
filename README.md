@@ -20,23 +20,23 @@ phpcs will run on diff of latest commit and master branch. For phpcs below files
 
 This demo deploys to server using deployer and circle-ci. Follow below steps to setup SSH for deployer.
 
-- Visit https://circleci.com/ and login with GitHub.
-- Go to user settings and link your github account.( Skip this step if you already logged in with github account )
-- Click on Add Projects, then click on Set up Project for whichever github directory you want to do setup
-- Click on `Start building` button
-- GO TO Settings->Projects
-- Click on project `setting` icon listed under `Followed Projects` title
+1. Visit https://circleci.com/ and login with GitHub.
+1. Go to user settings and link your github account.( Skip this step if you already logged in with github account )
+1. Click on Add Projects, then click on Set up Project for whichever github directory you want to do setup
+1. Click on `Start building` button
+1. GO TO Settings->Projects
+1. Click on project `setting` icon listed under `Followed Projects` title
     
     ![Project setting button](./screenshots/project_setting.png)
 
-- Create a SSH Key without passphrase ( `ssh-keygen -t rsa -b 4096 -C circleci-key` )
-- In _SSH Permissions_ menu, click on `Add SSH Key` and add private key created in above step
+1. Create a SSH Key without passphrase ( `ssh-keygen -t rsa -b 4096 -C circleci-key` )
+1. In _SSH Permissions_ menu, click on `Add SSH Key` and add private key created in above step
     
     ![SSH key setup button](./screenshots/ssh_key_set.png)
 
     ![SSH key setup button](./screenshots/ssh_key_add.png)
 
-- Add public key to `~/.ssh/authorized_keys` on server to run deployer
+1. Add public key to `~/.ssh/authorized_keys` on server to run deployer
 
 ### ENVIRONMENT Variables
 
