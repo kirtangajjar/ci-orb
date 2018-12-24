@@ -7,7 +7,7 @@ This demo repo will include basic circle ci for below.
 
 It also supports composer, npm, gulp as it's part of [docker image](https://hub.docker.com/r/rtcamp/ci-deployer/tags) we have used here.
 
-**PHPCS**
+### PHPCS
 
 phpcs will run on diff of latest commit and master branch. For phpcs below files are required.
 
@@ -16,7 +16,7 @@ phpcs will run on diff of latest commit and master branch. For phpcs below files
 - parse-diff-ranges.php
 - filter-report-for-patch-ranges.php
 
-**DEPLOY**
+### DEPLOY
 
 This demo deploys to server using deployer and circle-ci. Follow below steps to setup SSH for deployer.
 
@@ -38,7 +38,7 @@ This demo deploys to server using deployer and circle-ci. Follow below steps to 
 
 - Add public key to `~/.ssh/authorized_keys` on server to run deployer
 
-**ENVIRONMENT Variables**
+### ENVIRONMENT Variables
 
 Circle-ci allows to add important and private variables into environment variable and access them while running scripts on server.
 
