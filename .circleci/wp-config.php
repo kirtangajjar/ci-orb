@@ -101,7 +101,7 @@ if ( isset ($_ENV[ 'WP_ENV' ]) && $_ENV[ 'WP_ENV' ] != 'production' ) {
 /* Redis cache config */
 if ( empty( $redis_server ) ) {
 	# Attempt to automatically load Pantheon's Redis config from the env.
-	if ( null !== $_ENV['CACHE_HOST'] ) {
+	if ( isset( $_ENV['CACHE_HOST'] ) && null !== $_ENV['CACHE_HOST'] ) {
 		$redis_server = array(
 			'host' => $_ENV[ 'CACHE_HOST' ],
 			'port' => $_ENV[ 'CACHE_PORT' ],
@@ -113,6 +113,10 @@ if ( empty( $redis_server ) ) {
 			'port' => 6379,
 		);
 	}
+	define( 'RT_WP_NGINX_HELPER_REDIS_HOSTNAME', $redis_server['host'] );
+	define( 'RT_WP_NGINX_HELPER_REDIS_PORT', $redis_server['port'] );
+	define( 'RT_WP_NGINX_HELPER_REDIS_PREFIX', $_ENV['WP_PAGE_CACHE_KEY_SALT'] ?: $_ENV['WP_CACHE_KEY_SALT'] );
+	define( 'WP_REDIS_MAXTTL', $_ENV['WP_REDIS_MAXTTL'] );
 }
 if(isset($_ENV['MULTISITE']) && $_ENV['MULTISITE']==true)
 {
