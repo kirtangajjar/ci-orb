@@ -7,7 +7,8 @@ setup_environment
 
 mkdir -p "$build_root"
 pushd "$build_root" > /dev/null
-wp core download  --allow-root
+wp_version_file="$PROJECT_ROOT/WP-VERSION.txt"
+wp core download --version=$([ -s "$wp_version_file" ] && cat "$wp_version_file" || echo 'latest') --allow-root
 mv "$project_root/.circleci/.env.travis" "$build_root/.env"
 
 sed --quiet "s/^DB_NAME=.*/DB_NAME=$DB_NAME/" "$build_root/.env"
