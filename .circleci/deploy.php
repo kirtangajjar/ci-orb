@@ -1,5 +1,4 @@
 <?php
-
 namespace Deployer;
 require 'recipe/common.php';        //adds common necessities for the deployment
 
@@ -98,9 +97,6 @@ task('cachetool:download', function () {
 /*  custom task defination    */
 desc('Reset opcache');
 task('opcache:reset', function () {
-
-	// ee shell example.com --command="curl -fsSL https://raw.githubusercontent.com/gordalina/cachetool/gh-pages/downloads/cachetool-3.0.0.phar -o cachetool.phar"
-	// ee shell example.com --command="php cachetool.phar opcache:reset --fcgi=127.0.0.1:9000"
 
 	$output = run('php {{release_path}}/cachetool.phar opcache:reset --fcgi=127.0.0.1:9070');
 	writeln('<info>' . $output . '</info>');
