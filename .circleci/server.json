@@ -1,7 +1,0 @@
-{
-  "master": {
-    "server": "dev5-rt-gw.do.rstuff.in",
-    "user": "root",
-    "path": "/opt/easyengine/sites/abc.com/app/htdocs/wp-content/plugins/"
-  }
-}
