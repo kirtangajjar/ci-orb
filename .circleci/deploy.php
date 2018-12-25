@@ -44,7 +44,7 @@ set('rsync', [
 	'filter-file'  => false,
 	'filter-perdir'=> false,
 	'flags'        => 'rz', // Recursive, with compress
-	'options'      => ['delete', 'delete-excluded', 'links'],
+	'options'      => [ 'delete', 'delete-excluded', 'links', 'no-perms', 'no-owner', 'no-group' ],
 	'timeout'      => 300,
 ]);
 set('rsync_src', getenv('build_root'));
@@ -97,6 +97,7 @@ task('cachetool:download', function () {
 /*  custom task defination    */
 desc('Reset opcache');
 task('opcache:reset', function () {
+
 	$output = run('php {{release_path}}/cachetool.phar opcache:reset --fcgi=127.0.0.1:9070');
 	writeln('<info>' . $output . '</info>');
 });
