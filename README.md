@@ -1,5 +1,12 @@
 # ci-demo
 
+
+## Goal
+
+The end goal should be to have a CI repo/template, that other devs should be able to take forward in 30 mins or less.
+
+## Readme
+
 This demo repo will include basic circle ci for below.
 
 - phpcs
