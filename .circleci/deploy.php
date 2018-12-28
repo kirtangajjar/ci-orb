@@ -108,7 +108,7 @@ task('opcache:reset', function () {
  */
 desc('Correct Permissions');
 task('permissions:set', function () {
-	$output = run('chown -RH www-data:www-data {{deploy_path}}/current && chown www-data:www-data {{deploy_path}}/current');
+	$output = run('chown -R www-data:www-data {{deploy_path}}/current && chown www-data:www-data {{deploy_path}}/current/*');
 	writeln('<info>' . $output . '</info>');
 });
 

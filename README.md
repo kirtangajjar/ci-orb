@@ -16,6 +16,15 @@ phpcs will run on diff of latest commit and master branch. For phpcs below files
 - parse-diff-ranges.php
 - filter-report-for-patch-ranges.php
 
+### Setup 
+1. Create your site.
+3. Copy and Save all data in you `wp-config.php`.
+3. Delete all content inside `wp-content`.
+4. Create a `.env` file you can use `.env.example` inside `.circleci` to start with.
+5. Update `.env` with all necessary details.
+6. Create `uploads` directory in `htdocs`.
+7. Follow and complete the steps in the Deploy part to start CI on your site.
+
 ### DEPLOY
 
 This demo deploys to server using deployer and circle-ci. Follow below steps to setup SSH for deployer.

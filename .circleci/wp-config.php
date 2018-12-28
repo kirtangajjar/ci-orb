@@ -123,6 +123,7 @@ if(isset($_ENV['MULTISITE']) && $_ENV['MULTISITE']==true)
 	define('PATH_CURRENT_SITE', '/');
 	define('SITE_ID_CURRENT_SITE', 1);
 	define('BLOG_ID_CURRENT_SITE', 1);
+	define( 'COOKIE_DOMAIN', ! empty( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : false );
 }
 
 /* That's all, stop editing! Happy blogging. */

@@ -84,12 +84,15 @@ workflows:
     version: 2
     build_and_deploy:
        jobs:
-         - build
-         - deploy:
-            requires:
-              - build
-            filters:
-              branches:
-                only:
-                  - develop
-                  - master
+       - build:
+           filters:
+             branches:
+               only:
+               - develop
+               - master
+       - deploy:
+           filters:
+             branches:
+               only:
+               - develop
+               - master
