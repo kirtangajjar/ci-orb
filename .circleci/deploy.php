@@ -104,8 +104,7 @@ task('opcache:reset', function () {
 	$ee4 = run('ee --version | grep "EE 4"') !== NULL;
 
 	if( $ee4 ) {
-		// $site = Task\Context::get()->getHost()->get('site');
-		$output = run('ee shell {{site}} --command="php cachetool.phar opcache:reset --fcgi=127.0.0.1:9000"');
+		$output = run('ee shell {{site}} --command="php cachetool.phar opcache:reset --fcgi=127.0.0.1:9000" --skip-tty');
 	} else {
 		$output = run('php {{release_path}}/cachetool.phar opcache:reset --fcgi=127.0.0.1:9070');
 	}
@@ -132,13 +131,13 @@ task('deploy', [
 	'rsync',
 	'cachetool:download',
 	'deploy:symlink',
+	'deploy:custom_symlink',
 	'permissions:set',
 	'opcache:reset',
 	'deploy:unlock',
 	'cleanup'
 ]);
-task('custom_symlink', function() {
+task('deploy:custom_symlink', function() {
 	run("mv -T {{deploy_path}}/current {{deploy_path}}/htdocs");
 });
-after('deploy:symlink', 'custom_symlink');
 after('deploy', 'success');
