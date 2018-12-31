@@ -18,7 +18,7 @@ phpcs will run on diff of latest commit and master branch. For phpcs below files
 
 ### Setup 
 1. Create your site.
-3. Copy and Save all data in you `wp-config.php`.
+2. Copy and Save all data in your `wp-config.php`.
 3. Delete all content inside `wp-content`.
 4. Create a `.env` file you can use `.env.example` inside `.circleci` to start with.
 5. Update `.env` with all necessary details.
